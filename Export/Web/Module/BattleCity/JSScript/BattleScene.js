@@ -158,7 +158,6 @@ BattleCity.BattleScene = JavaScript.Class(ALittle.DisplayLayout, {
 			sub_map.get(col).RemoveFromParent();
 		}
 		let sprite = ALittle.NewObject(ALittle.Sprite, BattleCity.g_Control);
-		sprite.texture_name = "tile.png";
 		sprite.width = 32 / 4;
 		sprite.height = 32 / 4;
 		sprite.x = col * sprite.width;
@@ -167,6 +166,7 @@ BattleCity.BattleScene = JavaScript.Class(ALittle.DisplayLayout, {
 		sprite.col_count = 7 * 4;
 		sprite.row_index = row % 4 + 1;
 		sprite.col_index = col % 4 + 1 + (type - 1) * 4;
+		sprite.texture_name = "tile.png";
 		if (type === 3) {
 			this._grass_container.AddChild(sprite);
 		} else {

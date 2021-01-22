@@ -1,6 +1,9 @@
 -- ALittle Generate Lua And Do Not Edit This Line!
 do
 if _G.BattleCity == nil then _G.BattleCity = {} end
+local BattleCity = BattleCity
+local Lua = Lua
+local ALittle = ALittle
 local ___rawset = rawset
 local ___pairs = pairs
 local ___ipairs = ipairs
@@ -83,13 +86,13 @@ function BattleCity.BattlePlayer:BeAttack()
 end
 
 function BattleCity.BattlePlayer:UpdateWalk(frame_time)
-	if self._dir == BattleCity.DirType.DT_UP then
+	if self._dir == 1 then
 		self._sprite.row_index = 1
-	elseif self._dir == BattleCity.DirType.DT_RIGHT then
+	elseif self._dir == 4 then
 		self._sprite.row_index = 2
-	elseif self._dir == BattleCity.DirType.DT_DOWN then
+	elseif self._dir == 2 then
 		self._sprite.row_index = 3
-	elseif self._dir == BattleCity.DirType.DT_LEFT then
+	elseif self._dir == 3 then
 		self._sprite.row_index = 4
 	end
 	self._walk_frame = self._walk_frame + (0.01 * frame_time)

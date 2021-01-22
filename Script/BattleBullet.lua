@@ -1,6 +1,9 @@
 -- ALittle Generate Lua And Do Not Edit This Line!
 do
 if _G.BattleCity == nil then _G.BattleCity = {} end
+local BattleCity = BattleCity
+local Lua = Lua
+local ALittle = ALittle
 local ___rawset = rawset
 local ___pairs = pairs
 local ___ipairs = ipairs
@@ -22,11 +25,11 @@ function BattleCity.BattleBullet:Init(dir, role, speed)
 	self._role = role
 	self._alive = true
 	self._speed = speed
-	if self._dir == BattleCity.DirType.DT_UP then
+	if self._dir == 1 then
 		self._bullet.col_index = 1
-	elseif self._dir == BattleCity.DirType.DT_RIGHT then
+	elseif self._dir == 4 then
 		self._bullet.col_index = 2
-	elseif self._dir == BattleCity.DirType.DT_DOWN then
+	elseif self._dir == 2 then
 		self._bullet.col_index = 3
 	else
 		self._bullet.col_index = 4
@@ -44,7 +47,7 @@ end
 function BattleCity.BattleBullet:UpdateFrame(frame_time)
 	local explosion = false
 	if self._alive then
-		if self._dir == BattleCity.DirType.DT_UP then
+		if self._dir == 1 then
 			self.y = self.y - (self._speed * frame_time)
 			local check_collision, check_explosion = g_GCenter.battle_scene:BulletCollisionByEntity(self, self.x, self.y, self.x + self.width, self.y + self.height)
 			if check_collision then
@@ -67,7 +70,7 @@ function BattleCity.BattleBullet:UpdateFrame(frame_time)
 					explosion = true
 				end
 			end
-		elseif self._dir == BattleCity.DirType.DT_RIGHT then
+		elseif self._dir == 4 then
 			self.x = self.x + (self._speed * frame_time)
 			local check_collision, check_explosion = g_GCenter.battle_scene:BulletCollisionByEntity(self, self.x, self.y, self.x + self.width, self.y + self.height)
 			if check_collision then
@@ -90,7 +93,7 @@ function BattleCity.BattleBullet:UpdateFrame(frame_time)
 					explosion = true
 				end
 			end
-		elseif self._dir == BattleCity.DirType.DT_DOWN then
+		elseif self._dir == 2 then
 			self.y = self.y + (self._speed * frame_time)
 			local check_collision, check_explosion = g_GCenter.battle_scene:BulletCollisionByEntity(self, self.x, self.y, self.x + self.width, self.y + self.height)
 			if check_collision then

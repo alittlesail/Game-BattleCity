@@ -1,6 +1,9 @@
 -- ALittle Generate Lua And Do Not Edit This Line!
 do
 if _G.BattleCity == nil then _G.BattleCity = {} end
+local BattleCity = BattleCity
+local Lua = Lua
+local ALittle = ALittle
 local ___rawset = rawset
 local ___pairs = pairs
 local ___ipairs = ipairs
@@ -64,7 +67,7 @@ function BattleCity.BattleScene:Show(stage)
 	end
 	for row, sub_map in ___pairs(self._sprite_map) do
 		for col, sprite in ___pairs(sub_map) do
-			if sprite.col_index >= (BattleCity.BrushType.BT_RIVER - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_RIVER) * 4 then
+			if sprite.col_index >= (4 - 1) * 4 + 1 and sprite.col_index <= (4) * 4 then
 				local r_sub_map = self._river_map[row]
 				if r_sub_map == nil then
 					r_sub_map = {}
@@ -74,7 +77,7 @@ function BattleCity.BattleScene:Show(stage)
 			end
 		end
 	end
-	self._river_flash_brush = BattleCity.BrushType.BT_RIVER
+	self._river_flash_brush = 4
 	if self._castle_explosion ~= nil then
 		self._castle_explosion:Stop()
 		self._castle_explosion.visible = false
@@ -83,7 +86,7 @@ function BattleCity.BattleScene:Show(stage)
 	self._is_gameover = false
 	self._gameover_image.visible = false
 	self._iron_flash = false
-	self._iron_flash_brush = BattleCity.BrushType.BT_WALL
+	self._iron_flash_brush = 1
 	self._stage_num.text = stage
 	self._player1_life.text = g_GCenter.player1_data.life - 1
 	self._player2_life.text = g_GCenter.player2_data.life - 1
@@ -172,7 +175,7 @@ function BattleCity.BattleScene:SetTileShow(row, col, type)
 	sprite.col_count = 7 * 4
 	sprite.row_index = row % 4 + 1
 	sprite.col_index = col % 4 + 1 + (type - 1) * 4
-	if type == BattleCity.BrushType.BT_GRASS then
+	if type == 3 then
 		self._grass_container:AddChild(sprite)
 	else
 		self._tile_container:AddChild(sprite)
@@ -189,7 +192,7 @@ function BattleCity.BattleScene:TryRemoveWall(row, col)
 	if sprite == nil then
 		return false
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_WALL - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_WALL) * 4 then
+	if sprite.col_index >= (1 - 1) * 4 + 1 and sprite.col_index <= (1) * 4 then
 		self._tile_container:RemoveChild(sprite)
 		sub_map[col] = nil
 		return true
@@ -217,7 +220,7 @@ function BattleCity.BattleScene:CanWalkByMap(row, col)
 	if sprite == nil then
 		return true
 	end
-	return sprite.col_index >= (BattleCity.BrushType.BT_GRASS - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_GRASS) * 4
+	return sprite.col_index >= (3 - 1) * 4 + 1 and sprite.col_index <= (3) * 4
 end
 
 function BattleCity.BattleScene:Collision(left, top, right, bottom, target)
@@ -307,29 +310,29 @@ function BattleCity.BattleScene:BulletCollisionByMap(row, col, min_or_max, dir)
 	if sprite == nil then
 		return false
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_IRON - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_IRON) * 4 then
+	if sprite.col_index >= (2 - 1) * 4 + 1 and sprite.col_index <= (2) * 4 then
 		return true
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_GRASS - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_GRASS) * 4 then
+	if sprite.col_index >= (3 - 1) * 4 + 1 and sprite.col_index <= (3) * 4 then
 		return false
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_RIVER - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_RIVER) * 4 then
+	if sprite.col_index >= (4 - 1) * 4 + 1 and sprite.col_index <= (4) * 4 then
 		return false
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_RIVER2 - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_RIVER2) * 4 then
+	if sprite.col_index >= (5 - 1) * 4 + 1 and sprite.col_index <= (5) * 4 then
 		return false
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_CASTLE2 - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_CASTLE2) * 4 then
+	if sprite.col_index >= (7 - 1) * 4 + 1 and sprite.col_index <= (7) * 4 then
 		return false
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_CASTLE - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_CASTLE) * 4 then
+	if sprite.col_index >= (6 - 1) * 4 + 1 and sprite.col_index <= (6) * 4 then
 		local r = 12 * 4
 		while true do
 			if not(r < 13 * 4) then break end
 			local c = 6 * 4
 			while true do
 				if not(c < 7 * 4) then break end
-				self:SetTileShow(r, c, BattleCity.BrushType.BT_CASTLE2)
+				self:SetTileShow(r, c, 7)
 				c = c+(1)
 			end
 			r = r+(1)
@@ -345,8 +348,8 @@ function BattleCity.BattleScene:BulletCollisionByMap(row, col, min_or_max, dir)
 		self:ShowGameOver()
 		return true
 	end
-	if sprite.col_index >= (BattleCity.BrushType.BT_WALL - 1) * 4 + 1 and sprite.col_index <= (BattleCity.BrushType.BT_WALL) * 4 then
-		if dir == BattleCity.DirType.DT_UP or dir == BattleCity.DirType.DT_DOWN then
+	if sprite.col_index >= (1 - 1) * 4 + 1 and sprite.col_index <= (1) * 4 then
+		if dir == 1 or dir == 2 then
 			self:TryRemoveWall(row, col)
 			if min_or_max then
 				self:TryRemoveWall(row, col - 1)
@@ -372,13 +375,13 @@ end
 
 function BattleCity.BattleScene:FireBullet(role, speed)
 	local bullet = BattleCity.g_Control:CreateControl("battle_bullet")
-	if role.dir == BattleCity.DirType.DT_UP then
+	if role.dir == 1 then
 		bullet.x = role.x + role.width / 2 - bullet.width / 2
 		bullet.y = role.y
-	elseif role.dir == BattleCity.DirType.DT_RIGHT then
+	elseif role.dir == 4 then
 		bullet.x = role.x + role.width - bullet.width
 		bullet.y = role.y + role.height / 2 - bullet.height / 2
-	elseif role.dir == BattleCity.DirType.DT_DOWN then
+	elseif role.dir == 2 then
 		bullet.x = role.x + role.width / 2 - bullet.width / 2
 		bullet.y = role.y + role.height - bullet.height
 	else
@@ -397,7 +400,7 @@ function BattleCity.BattleScene:GenerateItem()
 	self._item_container:RemoveAllChild()
 	local row = ALittle.Math_RandomInt(0, 12 * 4)
 	local col = ALittle.Math_RandomInt(0, 12 * 4)
-	local item_type = ALittle.Math_RandomInt(BattleCity.ItemType.IT_LIFE, BattleCity.ItemType.IT_SHIELD)
+	local item_type = ALittle.Math_RandomInt(1, 6)
 	local item = BattleCity.g_Control:CreateControl("battle_item")
 	item.sprite.col_index = item_type
 	item.x = row * self._cell_size
@@ -442,7 +445,7 @@ function BattleCity.BattleScene:GenerateEnemy()
 			self._enemy_tiletable:RemoveChild(self._enemy_tiletable.childs[self._enemy_tiletable.child_count])
 			local enemy = BattleCity.g_Control:CreateControl("battle_enemy")
 			self._enemy_map[enemy] = true
-			enemy:StartBorn(0, pos * 4, ALittle.Math_RandomInt(1, 3), BattleCity.DirType.DT_DOWN, ALittle.Math_RandomInt(1, 100) > 80)
+			enemy:StartBorn(0, pos * 4, ALittle.Math_RandomInt(1, 3), 2, ALittle.Math_RandomInt(1, 100) > 80)
 			self._entity_container:AddChild(enemy)
 			self._enemy_count = self._enemy_count + (1)
 			self._generate_enemy_cool = 1000
@@ -458,11 +461,11 @@ end
 function BattleCity.BattleScene:Start()
 	if g_GCenter.player_count >= 1 then
 		self._entity_container:AddChild(self._player_1)
-		self._player_1:StartBorn(12 * 4, 4 * 4, g_GCenter.player1_data.level, BattleCity.DirType.DT_UP, 0.08)
+		self._player_1:StartBorn(12 * 4, 4 * 4, g_GCenter.player1_data.level, 1, 0.08)
 	end
 	if g_GCenter.player_count >= 2 then
 		self._entity_container:AddChild(self._player_2)
-		self._player_2:StartBorn(12 * 4, 8 * 4, g_GCenter.player2_data.level, BattleCity.DirType.DT_UP, 0.08)
+		self._player_2:StartBorn(12 * 4, 8 * 4, g_GCenter.player2_data.level, 1, 0.08)
 	end
 end
 
@@ -476,36 +479,36 @@ function BattleCity.BattleScene:HandleFrame(frame_time)
 	if not self._is_gameover then
 		if A_UISystem.sym_map[97] then
 			if self._player_1.parent ~= nil and self._player_1.alive then
-				self._player_1:Walk(BattleCity.DirType.DT_LEFT, frame_time)
+				self._player_1:Walk(3, frame_time)
 			end
 		elseif A_UISystem.sym_map[119] then
 			if self._player_1.parent ~= nil and self._player_1.alive then
-				self._player_1:Walk(BattleCity.DirType.DT_UP, frame_time)
+				self._player_1:Walk(1, frame_time)
 			end
 		elseif A_UISystem.sym_map[115] then
 			if self._player_1.parent ~= nil and self._player_1.alive then
-				self._player_1:Walk(BattleCity.DirType.DT_DOWN, frame_time)
+				self._player_1:Walk(2, frame_time)
 			end
 		elseif A_UISystem.sym_map[100] then
 			if self._player_1.parent ~= nil and self._player_1.alive then
-				self._player_1:Walk(BattleCity.DirType.DT_RIGHT, frame_time)
+				self._player_1:Walk(4, frame_time)
 			end
 		end
 		if A_UISystem.sym_map[1073741904] then
 			if self._player_2.parent ~= nil and self._player_2.alive then
-				self._player_2:Walk(BattleCity.DirType.DT_LEFT, frame_time)
+				self._player_2:Walk(3, frame_time)
 			end
 		elseif A_UISystem.sym_map[1073741906] then
 			if self._player_2.parent ~= nil and self._player_2.alive then
-				self._player_2:Walk(BattleCity.DirType.DT_UP, frame_time)
+				self._player_2:Walk(1, frame_time)
 			end
 		elseif A_UISystem.sym_map[1073741905] then
 			if self._player_2.parent ~= nil and self._player_2.alive then
-				self._player_2:Walk(BattleCity.DirType.DT_DOWN, frame_time)
+				self._player_2:Walk(2, frame_time)
 			end
 		elseif A_UISystem.sym_map[1073741903] then
 			if self._player_2.parent ~= nil and self._player_2.alive then
-				self._player_2:Walk(BattleCity.DirType.DT_RIGHT, frame_time)
+				self._player_2:Walk(4, frame_time)
 			end
 		end
 	end
@@ -544,23 +547,23 @@ function BattleCity.BattleScene:HandleFrame(frame_time)
 			player_life = self._player2_life
 		end
 		if player ~= nil then
-			if child.sprite.col_index == BattleCity.ItemType.IT_LIFE then
+			if child.sprite.col_index == 1 then
 				player_data.life = player_data.life + (1)
 				player_life.text = player_data.life - 1
-			elseif child.sprite.col_index == BattleCity.ItemType.IT_STAR then
+			elseif child.sprite.col_index == 5 then
 				player:LevelUp()
 				player_data.level = player.level
-			elseif child.sprite.col_index == BattleCity.ItemType.IT_BOMB then
+			elseif child.sprite.col_index == 4 then
 				for enemy, _ in ___pairs(self._enemy_map) do
 					if enemy.alive then
 						enemy:StartExplosion()
 					end
 				end
-			elseif child.sprite.col_index == BattleCity.ItemType.IT_IRON then
+			elseif child.sprite.col_index == 3 then
 				self._iron_flash = false
 				self._iron_flash_count = 0
 				self._iron_flash_frame = 0
-				local brush_type = BattleCity.BrushType.BT_IRON
+				local brush_type = 2
 				local row = 11 * 4 + 2
 				while true do
 					if not(row <= 11 * 4 + 3) then break end
@@ -599,9 +602,9 @@ function BattleCity.BattleScene:HandleFrame(frame_time)
 				end
 				self._iron_flash_delay_loop = ALittle.LoopTimer(Lua.Bind(self.StartIronFlash, self), 10000)
 				self._iron_flash_delay_loop:Start()
-			elseif child.sprite.col_index == BattleCity.ItemType.IT_SHIELD then
+			elseif child.sprite.col_index == 6 then
 				player:StartShield()
-			elseif child.sprite.col_index == BattleCity.ItemType.IT_STOP then
+			elseif child.sprite.col_index == 2 then
 				if self._item_stop_delay_loop ~= nil then
 					self._item_stop_delay_loop:Stop()
 				end
@@ -620,14 +623,14 @@ function BattleCity.BattleScene:HandleFrame(frame_time)
 		end
 	end
 	if self._iron_flash then
-		local brush_type = BattleCity.BrushType.BT_WALL
+		local brush_type = 1
 		self._iron_flash_frame = self._iron_flash_frame + (0.005 * frame_time)
 		if self._iron_flash_frame >= 2 then
 			self._iron_flash_frame = 0
 		end
 		if self._iron_flash_frame > 1 then
 			self._iron_flash_count = self._iron_flash_count + (1)
-			brush_type = BattleCity.BrushType.BT_IRON
+			brush_type = 2
 		else
 			if self._iron_flash_count >= 100 then
 				self._iron_flash = false
@@ -670,13 +673,13 @@ function BattleCity.BattleScene:HandleFrame(frame_time)
 			end
 		end
 	end
-	local brush_type = BattleCity.BrushType.BT_RIVER
+	local brush_type = 4
 	self._river_flash_frame = self._river_flash_frame + (0.0008 * frame_time)
 	if self._river_flash_frame >= 2 then
 		self._river_flash_frame = 0
 	end
 	if self._river_flash_frame > 1 then
-		brush_type = BattleCity.BrushType.BT_RIVER2
+		brush_type = 5
 	end
 	if self._river_flash_brush ~= brush_type then
 		self._river_flash_brush = brush_type
@@ -724,7 +727,7 @@ function BattleCity.BattleScene:RoleDeath(role)
 			g_GCenter.player1_data.level = 1
 			self._player1_life.text = g_GCenter.player1_data.life - 1
 			self._entity_container:AddChild(self._player_1)
-			self._player_1:StartBorn(12 * 4, 4 * 4, g_GCenter.player1_data.level, BattleCity.DirType.DT_UP, 0.08)
+			self._player_1:StartBorn(12 * 4, 4 * 4, g_GCenter.player1_data.level, 1, 0.08)
 		end
 	elseif role == self._player_2 then
 		g_GCenter.player2_data.life = g_GCenter.player2_data.life - (1)
@@ -732,7 +735,7 @@ function BattleCity.BattleScene:RoleDeath(role)
 			g_GCenter.player2_data.level = 1
 			self._player2_life.text = g_GCenter.player2_data.life - 1
 			self._entity_container:AddChild(self._player_2)
-			self._player_2:StartBorn(12 * 4, 8 * 4, g_GCenter.player2_data.level, BattleCity.DirType.DT_UP, 0.08)
+			self._player_2:StartBorn(12 * 4, 8 * 4, g_GCenter.player2_data.level, 1, 0.08)
 		end
 	else
 		self._enemy_map[role] = nil

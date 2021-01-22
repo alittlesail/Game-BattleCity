@@ -237,9 +237,8 @@ public class BattleScene : ALittle.DisplayLayout
         if (sub_map[col] != null)
         	sub_map[col].RemoveFromParent();
 
-            // 设置表现
+        // 设置表现
         var sprite = new ALittle.Sprite(g_Control);
-        sprite.texture_name = "tile.png";
         sprite.width = 32 / 4;
         sprite.height = 32 / 4;
         sprite.x = col * sprite.width;
@@ -248,6 +247,7 @@ public class BattleScene : ALittle.DisplayLayout
         sprite.col_count = 7 * 4;
         sprite.row_index = row % 4 + 1;
         sprite.col_index = col % 4 + 1 + (type - 1) * 4;
+        sprite.texture_name = "tile.png";
         if (type == BrushType.BT_GRASS)
             this._grass_container.AddChild(sprite);
         else
